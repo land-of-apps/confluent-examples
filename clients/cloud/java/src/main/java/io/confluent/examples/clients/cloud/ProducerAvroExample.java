@@ -71,7 +71,7 @@ public class ProducerAvroExample {
 
     // Create topic if needed
     final String topic = args[1];
-    createTopic(topic, 1, 3, props);
+    createTopic(topic, 1, 1, props);
 
     // Add additional properties.
     props.put(ProducerConfig.ACKS_CONFIG, "all");
