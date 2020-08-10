@@ -60,7 +60,7 @@ public class ConsumerExample {
     Long total_count = 0L;
 
     try {
-      while (true) {
+      while (total_count <= 10) {
         ConsumerRecords<String, DataRecord> records = consumer.poll(100);
         for (ConsumerRecord<String, DataRecord> record : records) {
           String key = record.key();

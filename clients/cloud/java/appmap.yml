@@ -1,0 +1,4 @@
+name: confluent-java-client-example
+
+packages:
+ - path: io.confluent.examples

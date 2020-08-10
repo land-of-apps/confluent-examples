@@ -49,6 +49,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class StreamsExample {
 
@@ -91,9 +92,10 @@ public class StreamsExample {
 
         KafkaStreams streams = new KafkaStreams(builder.build(), props);
         streams.start();
-
+        TimeUnit.SECONDS.sleep(5);
+        streams.close();
         // Add shutdown hook to respond to SIGTERM and gracefully close Kafka Streams
-        Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
+//        Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
 
     }
 
