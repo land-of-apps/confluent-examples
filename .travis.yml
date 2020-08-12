@@ -9,11 +9,12 @@ services:
 
 import: land-of-apps/land-of-apps:travis/java-imports.yml
 
-before_install:
-- curl -fsSL https://api.github.com/repos/confluentinc/cp-all-in-one/contents/cp-all-in-one/docker-compose.yml?ref=5.5.1-post   | jq -r .content | base64 --decode > docker-compose.yml
 
 before_script:
+- curl -fsSL https://api.github.com/repos/confluentinc/cp-all-in-one/contents/cp-all-in-one/docker-compose.yml?ref=5.5.1-post   | jq -r .content | base64 --decode > docker-compose.yml
 - docker-compose up -d
+- sleep 15
 
 script:
-- ls
+- export MAVEN_OPTS="-javaagent:./appmap.jar -Dappmap.debug=true -Dappmap.config.file=./appmap.yml -Dappmap.record=io.confluent.examples.clients.cloud.ProducerExample.main"
+- mvn -f ./clients/cloud/java exec:java -Dexec.mainClass="io.confluent.examples.clients.cloud.ProducerExample"
